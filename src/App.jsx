@@ -25,8 +25,8 @@ const starStyle = {
 };
 
 export default function App({maxRating = 3}) {
-    const [Rating, setRating] = useState(1);
-    const [isHover, setIsHover] = useState(1);
+    const [rating, setRating] = useState(0);
+    const [isHover, setIsHover] = useState(0);
 
     function handleRate(rate) {
         setRating(rate);
@@ -36,11 +36,11 @@ export default function App({maxRating = 3}) {
         <div style={containerStyle}>
             <div style={starContainerStyle}>
                 {Array.from({length: maxRating}, (_, i) => (
-                    <Star key={i} onRate={() => handleRate(i + 1)} full={isHover >= i + 1}
+                    <Star key={i} onRate={() => handleRate(i + 1)} full={isHover ? isHover >= i + 1 : rating >= i + 1}
                           mouseEnter={() => setIsHover(i + 1)} mouseLeave={() => setIsHover(0)}/>
                 ))}
             </div>
-            <p style={textStyle}>{isHover}</p>
+            <p style={textStyle}>{isHover || rating || ""}</p>
         </div>
     );
 }
