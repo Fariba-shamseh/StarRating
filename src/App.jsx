@@ -25,21 +25,25 @@ const starStyle = {
 };
 
 export default function App({ maxRating = 3 }) {
+    const [Rating , setRating]=useState(1);
+    function handleRate(rate){
+        setRating(rate);
+    }
   return (
     <div style={containerStyle}>
       <div style={starContainerStyle}>
         {Array.from({ length: maxRating }, (_, i) => (
-          <Star key={i} />
+          <Star key={i} onRate={()=>handleRate(i+1)}/>
         ))}
       </div>
-      <p style={textStyle}>{maxRating}</p>
+      <p style={textStyle}>{Rating}</p>
     </div>
   );
 }
 
-function Star() {
+function Star({onRate}) {
   return (
-    <span role="button" style={starStyle}>
+    <span role="button" style={starStyle} onClick={onRate} >
       <svg
         xmlns="http://www.w3.org/2000/svg"
         viewBox="0 0 20 20"
