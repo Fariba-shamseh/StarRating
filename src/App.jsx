@@ -19,13 +19,15 @@ export default function App({
                                 size = 48,
                                 className = "",
                                 message = [],
-                                defaultRating = 0
+                                defaultRating = 0,
+                                onSetRating,
                             }) {
     const [rating, setRating] = useState(defaultRating);
     const [isHover, setIsHover] = useState(0);
 
     function handleRate(rate) {
-        setRating(rate);
+        setRating(rate);    //update current rating
+        onSetRating(rate); //call callback with new rating
     }
 
     const textStyle = {
